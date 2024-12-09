@@ -1,20 +1,15 @@
-
-import { Button } from "@/components/ui/button"
-import Home from "./Home"
-import Header from "./shared/header"
+import Home from "./Home";
+import Header from "./shared/header";
 
 function App() {
-
   return (
     <>
       <Header></Header>
       <div className="px-2">
-              <Home></Home>
-              <Button>click</Button>
+        <Home></Home>
       </div>
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;

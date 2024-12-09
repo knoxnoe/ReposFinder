@@ -1,10 +1,5 @@
 "use client"
 
-import { addDays, format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import * as React from "react"
-import { DateRange } from "react-day-picker"
-
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -13,6 +8,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { addDays, format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import * as React from "react"
+import { DateRange } from "react-day-picker"
+
+
 function Home({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -22,7 +23,8 @@ function Home({
   })
 
   return (
-    <div className={cn("grid gap-2", className)}>
+   <div>
+     <div className={cn("grid gap-2", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -60,6 +62,8 @@ function Home({
         </PopoverContent>
       </Popover>
     </div>
+
+   </div>
   )
 }
 
