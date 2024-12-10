@@ -1,4 +1,4 @@
-import Home from "./Home";
+import Repos from "./Repos";
 import Header from "./shared/header";
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
     <>
       <Header></Header>
       <div className="px-2">
-        <Home></Home>
+        <Repos></Repos>
       </div>
     </>
   );
