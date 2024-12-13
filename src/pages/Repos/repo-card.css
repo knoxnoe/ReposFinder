@@ -1,0 +1,65 @@
+/* src/pages/Repos/SelectedRepos.css */
+
+.repo-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.repo-card {
+  width: 300px;
+  height: 400px;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.repo-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.repo-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.repo-link:hover {
+  background-color: #0056b3;
+}
+
+.repo-stats {
+  display: flex;
+  font-size: 12px;
+  margin-top: 4px;
+  justify-content: space-between;
+}
+
+.repo-stats span {
+  display: flex;
+  align-items: center;
+}
+
+.repo-stats i {
+  margin-right: 4px; /* 图标与数字之间的间距 */
+}
+
+.repo-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 限制为3行 */
+  overflow: hidden;
+  color: #9f9f9f;
+  text-align: left;
+  font-size: 14px;
+  margin-top: 12px;
+  text-overflow: ellipsis; /* 超出部分用省略号表示 */
+}
