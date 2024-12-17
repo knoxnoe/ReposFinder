@@ -36,7 +36,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
   };
 
   return (
-    <Card className="repo-card flex flex-col justify-between">
+    <Card className="repo-card flex flex-col justify-between cursor-pointer">
       <div>
         <h2 className="text-base font-semibold">{repo.name}</h2>
         <div className="repo-stats">
