@@ -66,9 +66,11 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
             {repo.description || "No description available"}
           </PopoverContent>
         </Popover>
-        <span style={{ color: languageColor }} className="text-sm">
-          {repo.language || "Language not specified"}
-        </span>
+        <div className="flex justify-end">
+          <span style={{ color: languageColor }} className="text-xs">
+            {repo.language || "Unknown"}
+          </span>
+        </div>
       </div>
 
       <div>
