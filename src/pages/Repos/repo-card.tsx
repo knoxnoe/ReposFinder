@@ -9,7 +9,7 @@ import { Repository } from "@/githubApi";
 import React from "react";
 
 import "font-awesome/css/font-awesome.min.css";
-import "./repo-card.css"; // 引入样式
+import "./repo-card.css";
 
 interface RepoCardProps {
   repo: Repository;

@@ -42,7 +42,7 @@ const LngCombobox = () => {
     if (lngList.includes(currentValue)) {
       setLngList(lngList.filter((lng) => lng !== currentValue));
     } else {
-      setLngList([...lngList, currentValue]);
+      setLngList([currentValue]);
     }
     setValue(currentValue);
     setOpen(false);
