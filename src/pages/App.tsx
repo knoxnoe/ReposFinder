@@ -1,4 +1,4 @@
-import Repos from "./repos";
+import Repos from "./search-repos";
 import Header from "./_shared/header";
 
 function App() {
