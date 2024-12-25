@@ -1,11 +1,11 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle, useMemo } from "react";
 import { fetchRepositories, Repository } from "../../githubApi";
 import RepoCard from "./repo-card";
-import { useRepoFilter } from "./repo-filter-context";
+import { useRepoFilter, convertSortModeToApiParam } from "./repo-filter-context";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const SelectedRepos = forwardRef<{ reload: () => void }>((props, ref) => {
-  const { lngList, startDate, endDate } = useRepoFilter();
+  const { lngList, startDate, endDate, sortMode } = useRepoFilter();
   const [repos, setRepos] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,8 +19,11 @@ const SelectedRepos = forwardRef<{ reload: () => void }>((props, ref) => {
     const createdBefore = endDate
       ? ` created:<${endDate.toISOString().split("T")[0]}`
       : "";
-    return `stars:>1${languageFilter}${createdAfter}${createdBefore}`.trim();
-  }, [lngList, startDate, endDate]);
+
+    const sortParam = sortMode ? ` sort:${convertSortModeToApiParam(sortMode)}` : "";
+
+    return `stars:>1${languageFilter}${createdAfter}${createdBefore}${sortParam}`.trim();
+  }, [lngList, startDate, endDate, sortMode]);
 
   const loadRepos = async () => {
     setLoading(true);
@@ -38,7 +41,7 @@ const SelectedRepos = forwardRef<{ reload: () => void }>((props, ref) => {
 
   useEffect(() => {
     loadRepos();
-  }, [buildQuery]);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     reload: loadRepos

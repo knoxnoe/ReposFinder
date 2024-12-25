@@ -16,24 +16,27 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 import { useRepoFilter } from "./repo-filter-context";
+import type { SortMode } from "./repo-filter-context";
 
-const languages = [
-  { value: "0", label: "Stars Count" },
-  { value: "1", label: "Stars Change" },
+const sortOptions: { value: SortMode; label: string }[] = [
+  { value: "top_stars", label: "Top Stars" },
+  { value: "top_stars_increase", label: "Top Stars Increase" },
+  { value: "recent_stars", label: "Recent Stars" },
+  { value: "most_forks", label: "Most Forks" },
+  { value: "most_contributors", label: "Most Contributors" },
+  { value: "recently_updated", label: "Recently Updated" },
 ];
 
 const SortMode = () => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<string>("");
-  const { lngList, setLngList } = useRepoFilter();
+  const [selectedSort, setSelectedSort] = React.useState<SortMode | null>(null);
+  const { sortMode, setSortMode } = useRepoFilter();
 
-  const handleSelect = (currentValue: string) => {
-    if (lngList.includes(currentValue)) {
-      setLngList(lngList.filter((lng) => lng !== currentValue));
-    } else {
-      setLngList([...lngList, currentValue]);
-    }
-    setValue(currentValue);
+  const handleSelect = (currentValue: SortMode) => {
+    const newSortMode = currentValue === selectedSort ? "top_stars" : currentValue;
+
+    setSelectedSort(newSortMode);
+    setSortMode(newSortMode);
     setOpen(false);
   };
 
@@ -44,33 +47,35 @@ const SortMode = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[250px] justify-between"
         >
-          {value || "Select language..."}
+          {selectedSort
+            ? sortOptions.find(option => option.value === selectedSort)?.label
+            : "Select Sort Mode"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[250px] p-0">
         <Command>
-          <CommandInput placeholder="Search language..." />
+          <CommandInput placeholder="Search sort mode..." />
           <CommandList>
-            <CommandEmpty>No language found.</CommandEmpty>
+            <CommandEmpty>No sort mode found.</CommandEmpty>
             <CommandGroup>
-              {languages.map((language) => (
+              {sortOptions.map((option) => (
                 <CommandItem
-                  key={language.value}
-                  value={language.value}
-                  onSelect={() => handleSelect(language.value)}
+                  key={option.value}
+                  value={option.value}
+                  onSelect={() => handleSelect(option.value)}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      lngList.includes(language.value)
+                      selectedSort === option.value
                         ? "opacity-100"
                         : "opacity-0"
                     )}
                   />
-                  {language.label}
+                  {option.label}
                 </CommandItem>
               ))}
             </CommandGroup>
